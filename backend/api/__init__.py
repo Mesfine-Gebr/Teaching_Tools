@@ -37,6 +37,8 @@ def create_app():
     from .feedback import feedback
     from .models import User
     from .user import user
+
+    from .calendar import calendar
     
     ##create MySQL database##    
     load_dotenv()
@@ -62,6 +64,7 @@ def create_app():
     app.register_blueprint(programs, url_prefix='/')
     app.register_blueprint(feedback, url_prefix='/')
     app.register_blueprint(user, url_prefix='/')
+    app.register_blueprint(calendar, url_prefix='/')
     
     with app.app_context():
         db.create_all()

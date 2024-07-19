@@ -107,6 +107,9 @@ class Appointment(db.Model):
     status = db.Column(db.String(50))  # posted, booked, cancelled
     availability = db.relationship('Availability', back_populates='appointments')
     appointment_comment = db.relationship('AppointmentComment', backref='appointment', cascade='all, delete-orphan')
+
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))  # ForeignKey to Event table
+    event  = db.relationship('Event', backref='appointment')
     
 class AppointmentComment(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -125,3 +128,18 @@ class Feedback(db.Model):
     attendee_notes = db.Column(db.Text)
     host_rating = db.Column(db.String(255))
     host_notes = db.Column(db.Text)
+
+
+# Adding the calendar event database data
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
+    title = db.Column(db.String(100))
+    start_date = db.Column(db.String(150))
+    end_date = db.Column(db.String(150))
+    physical_location = db.Column(db.String(150))
+    meeting_url = db.Column(db.String(200))
+    description = db.Column(db.Text)
+
+    
+   # appointments = db.relationship('Appointment', backref='event_id')  

@@ -24,6 +24,8 @@ import Times from "./pages/Times";
 import ProgramDetails from "./pages/ProgramDetails";
 import Profile from "./pages/Profile";
 
+import Calendar from "./components/Calendar"
+
 function App() {
   ////////////////////////////////////////////////////////
   //                 Render Functions                   //
@@ -41,6 +43,9 @@ function App() {
           <Route path="/registerform" element={<RegisterForm />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
+          
+
+
 
           {/* Admin Routes */}
           <Route
@@ -137,6 +142,20 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+
+          {/* Routes For All Roles*/}
+          <Route
+            path="/calendar"
+            element={
+              <ProtectedRoute
+                allowedAccountTypes={["instructor", "student", "admin"]}
+              >
+                <Calendar />
+              </ProtectedRoute>
+            }
+          />
+
         </Routes>
       </div>
     </>

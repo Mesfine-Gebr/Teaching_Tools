@@ -277,7 +277,6 @@ def get_student_appointments_for_course():
         current_time_pst = datetime.now(timezone.utc) - timedelta(hours=8)
         current_date_str = current_time_pst.strftime('%Y-%m-%d')
         current_time_str = current_time_pst.strftime('%H:%M')
-
         appointments_query = Appointment.query.filter(Appointment.attendee_id == student_id)
 
         # filter appointments based on meeting type
